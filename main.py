@@ -24,16 +24,20 @@ async def root(request: Request):
     user_id = request['message']['from']['id']
     chat_id = request['message']['chat']['id']
     request_text =  request['message']['text']
-    response_text = get_gpt_response(request_text,OPENAI_APIKEY)
-    if str(user_id) not in AUTHORIZED_USERS:
+    if request_text == "/start":
+        response_text = "Ciao, sono un bot che usa GPT-3 per rispondere ai messaggi. Scrivi qualcosa e vediamo cosa succede!"
+    else if str(user_id) not in AUTHORIZED_USERS:
         print("Authorized users: "+str(AUTHORIZED_USERS))
         print("Unauthorized user: "+str(user_id))
         response_text = "Non sei autorizzato ad usare questo bot."
+    else:
+        response_text = get_gpt_response(request_text,OPENAI_APIKEY)
     #send message to telegram
     url = 'https://api.telegram.org/bot'+str(TELEGRAM_APIKEY)+'/sendMessage'
     params = {
         'chat_id': chat_id,
-        'text': response_text
+        'text': response_text,
+        'parse_mode': 'MarkdownV2'
     }
     r = requests.get(url, params=params)
     print(r.json())
