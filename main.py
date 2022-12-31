@@ -34,8 +34,7 @@ async def root(request: Request):
     url = 'https://api.telegram.org/bot'+str(TELEGRAM_APIKEY)+'/sendMessage'
     params = {
         'chat_id': chat_id,
-        'text': response_text,
-        'parse_mode': 'MarkdownV2'
+        'text': response_text
     }
     r = requests.get(url, params=params)
     print(r.json())
