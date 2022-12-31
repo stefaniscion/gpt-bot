@@ -37,5 +37,4 @@ async def root(request: Request):
         'text': response_text
     }
     r = requests.get(url, params=params)
-    print(r.json())
     return {"message": "Message sent successfully!"}
