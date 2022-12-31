@@ -26,10 +26,8 @@ async def root(request: Request):
     request_text =  request['message']['text']
     if request_text == "/start":
         response_text = "Ciao, sono un bot che usa GPT-3 per rispondere ai messaggi. Scrivi qualcosa e vediamo cosa succede!"
-    else if str(user_id) not in AUTHORIZED_USERS:
-        print("Authorized users: "+str(AUTHORIZED_USERS))
-        print("Unauthorized user: "+str(user_id))
-        response_text = "Non sei autorizzato ad usare questo bot."
+    elif str(user_id) not in AUTHORIZED_USERS:
+        response_text = "Non sei autorizzato ad usare questo bot. (User ID: "+str(user_id)+")"
     else:
         response_text = get_gpt_response(request_text,OPENAI_APIKEY)
     #send message to telegram
