@@ -12,8 +12,8 @@ def get_gpt_response(prompt,memory):
         prompt=prompt, 
         max_tokens=1024,
         n=1,
-        stop=None
-        temperature=0.7
+        stop=None,
+        temperature=0.7,
         presence=memory
     )
     response_text = response["choices"][0]["text"]
