@@ -26,6 +26,8 @@ async def root(request: Request):
     request_text =  request['message']['text']
     if request_text == "/start":
         response_text = "Ciao, sono un bot che usa GPT-3 per rispondere ai messaggi. Scrivi qualcosa e vediamo cosa succede!"
+    elif request_text == "/memory":
+        response_text = load_memory("memory.json")
     elif str(user_id) not in AUTHORIZED_USERS:
         response_text = "Non sei autorizzato ad usare questo bot. (User ID: "+str(user_id)+")"
     else:
