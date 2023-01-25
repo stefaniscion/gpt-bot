@@ -32,14 +32,14 @@ async def root(request: Request):
         response_text = "Non sei autorizzato ad usare questo bot. (User ID: "+str(user_id)+")"
     else:
         memory = load_memory("memory.json")
-        response_text,response_tokens = get_gpt_response(request_text,memory)
+        response_text = get_gpt_response(request_text,memory)
         memory.append(response_text)
         save_memory("memory.json",memory)
     #send message to telegram
     url = 'https://api.telegram.org/bot'+str(TELEGRAM_APIKEY)+'/sendMessage'
     params = {
         'chat_id': chat_id,
-        'text': str(response_text) + "```"+str(response_tokens)+"```"
+        'text': response_text
     }
     r = requests.get(url, params=params)
     return {"message": "Message sent successfully!"}
