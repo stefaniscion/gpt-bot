@@ -16,6 +16,6 @@ def get_gpt_response(prompt,memory):
         stop=None,
         temperature=0.7
     )
-    response_text = response["choices"][0]["text"]
-    response_token = response["choices"][0]["token_counts"]
+    response_text = gpt_response["choices"][0]["text"]
+    response_token = gpt_response["choices"][0]["token_counts"]
     return response_text,response_token
